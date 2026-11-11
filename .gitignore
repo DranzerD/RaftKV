@@ -1,0 +1,6 @@
+/data/
+/bin/
+*.exe
+*.test
+*.out
+coverage.*

@@ -1,0 +1,7 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: raftkv
+    static_configs:
+      - targets: ["node1:7000", "node2:7000", "node3:7000"]
