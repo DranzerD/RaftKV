@@ -171,10 +171,12 @@ func Start(cfg Config) (*Server, error) {
 		ReadHeaderTimeout: 5 * time.Second,
 		IdleTimeout:       time.Minute,
 	}
-	go s.http.Serve(ln)
-	go s.run()
+	// Log before starting run: from then on only that goroutine may touch
+	// the node.
 	cfg.Logf("node %d: serving on %s, recovered term %d, log %d..%d",
 		cfg.ID, ln.Addr(), st.HardState.Term, node.FirstIndex()+1, node.LastIndex())
+	go s.http.Serve(ln)
+	go s.run()
 	return s, nil
 }
 
